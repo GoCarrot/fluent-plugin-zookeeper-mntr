@@ -30,13 +30,8 @@ module Fluent
 
       def start
         super
-        @finished = false
+        timer_execute(:in_zookeeper_mntr_runner, 0, repeat: false, &method(:run))
         timer_execute(:in_zookeeper_mntr_runner, @interval, &method(:run))
-      end
-
-      def shutdown
-        @finished = true
-        super
       end
 
     private
