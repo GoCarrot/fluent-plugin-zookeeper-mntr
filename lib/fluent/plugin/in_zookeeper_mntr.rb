@@ -47,7 +47,7 @@ module Fluent
               Hash[data.split("\n").map! { |row| row.split("\t") }]
             end
 
-          message.transform_values do |value|
+          message.transform_values! do |value|
             if value =~ /\A[0-9]+\z/
               value.to_i
             else
