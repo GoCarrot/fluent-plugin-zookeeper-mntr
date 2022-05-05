@@ -40,11 +40,17 @@ module Fluent
         socket_create_tcp(@host, @port) do |socket|
           socket.write('mntr')
           data = socket.read
-          message = Hash[
-            data.split("\n").map { |row| row.split("\t") }
-          ]
+          message =
+            if data.start_with?('This ZooKeeper')
+              { 'error' => data }
+            else
+              Hash[data.split("\n").map! { |row| row.split("\t") }]
+            end
+
           router.emit(@tag, Fluent::EventTime.now, message)
         end
+      rescue StandardError => exc
+        router.emit(@tag, Fluent::EventTime.now, { 'error' => exc.message })
       end
     end
   end
