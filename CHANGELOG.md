@@ -1,3 +1,10 @@
+## 0.0.4
+
+BUG FIXES:
+
+* Report typecast integer statistics.
+* Handle negative integers.
+
 ## 0.0.3
 
 ENHANCEMENTS:
