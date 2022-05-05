@@ -47,6 +47,14 @@ module Fluent
               Hash[data.split("\n").map! { |row| row.split("\t") }]
             end
 
+          message.transform_values do |value|
+            if value =~ /\A[0-9]+\z/
+              value.to_i
+            else
+              value
+            end
+          end
+
           router.emit(@tag, Fluent::EventTime.now, message)
         end
       rescue StandardError => exc
