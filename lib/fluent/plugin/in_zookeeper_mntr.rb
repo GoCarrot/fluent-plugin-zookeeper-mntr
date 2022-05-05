@@ -48,7 +48,7 @@ module Fluent
             end
 
           message.transform_values! do |value|
-            if value =~ /\A[0-9]+\z/
+            if value =~ /\A\-?[0-9]+\z/
               value.to_i
             else
               value
