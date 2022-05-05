@@ -1,3 +1,10 @@
+## 0.0.3
+
+ENHANCEMENTS:
+
+* Report errors in a well formed way.
+* Typecast integer statistics to integers.
+
 ## 0.0.2
 
 ENHANCEMENTS:
